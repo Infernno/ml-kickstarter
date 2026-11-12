@@ -1,0 +1,6 @@
+[core]
+    remote = data
+['remote "data"']
+    url = https://pub-1dc47d6a8067458ea07e90c56655c918.r2.dev/data
+['remote "models"']
+    url = https://pub-1dc47d6a8067458ea07e90c56655c918.r2.dev/models

@@ -1,0 +1,17 @@
+stages:
+  preprocess:
+    cmd: uv run ml-kickstarter preprocess
+    deps:
+      - pyproject.toml
+      - uv.lock
+      - data/raw/dataset.csv
+      - configs/config.yaml
+      - configs/data/kickstarter.yaml
+      - src/ml_kickstarter/commands.py
+      - src/ml_kickstarter/constants.py
+      - src/ml_kickstarter/data/download.py
+      - src/ml_kickstarter/data/features.py
+      - src/ml_kickstarter/data/preprocess.py
+    outs:
+      - data/processed/prepared.csv:
+          remote: data

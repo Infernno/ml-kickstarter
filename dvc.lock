@@ -1,0 +1,50 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: uv run ml-kickstarter preprocess
+    deps:
+    - path: configs/config.yaml
+      hash: md5
+      md5: ab31cc4a11c2289524a34bc2d2ac8247
+      size: 43
+    - path: configs/data/kickstarter.yaml
+      hash: md5
+      md5: 23b5bf64441cc53025db8298d7d5fd91
+      size: 87
+    - path: data/raw/dataset.csv
+      hash: md5
+      md5: 49c0973f1028099de8cdc6937e3f0fd9
+      size: 454851804
+    - path: pyproject.toml
+      hash: md5
+      md5: 6570e5da3497f6711fddd1d29cb0e1fb
+      size: 627
+    - path: src/ml_kickstarter/commands.py
+      hash: md5
+      md5: 1580a9618debcc989b8f1560b3ebe0b9
+      size: 1011
+    - path: src/ml_kickstarter/constants.py
+      hash: md5
+      md5: 637020c8f56bd2a0a23e3151f3abe5c7
+      size: 528
+    - path: src/ml_kickstarter/data/download.py
+      hash: md5
+      md5: 88fd1c08353893e85caeabdd94a8a503
+      size: 344
+    - path: src/ml_kickstarter/data/features.py
+      hash: md5
+      md5: f3f5ae7d03b8c9057704d41c49c99ac2
+      size: 591
+    - path: src/ml_kickstarter/data/preprocess.py
+      hash: md5
+      md5: 7ee554a77a752bf8951de1fbf2feeeef
+      size: 2763
+    - path: uv.lock
+      hash: md5
+      md5: a300bff6855263b6caffe34c76ca3e73
+      size: 344964
+    outs:
+    - path: data/processed/prepared.csv
+      hash: md5
+      md5: 18bf39b32e4bd931714ae417ba84f655
+      size: 142993460

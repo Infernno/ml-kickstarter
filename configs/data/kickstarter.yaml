@@ -1,0 +1,3 @@
+raw_path: data/raw/dataset.csv
+prepared_path: data/processed/prepared.csv
+remote: data

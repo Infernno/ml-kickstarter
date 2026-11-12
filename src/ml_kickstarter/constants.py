@@ -1,0 +1,22 @@
+TARGET_BY_STATE = {"successful": 1, "failed": 0}
+
+TEXT_COLUMNS = ["name", "blurb"]
+CATEGORY_COLUMNS = ["currency", "country", "category_parent_name", "category_name"]
+DATE_COLUMNS = ["created_at", "launched_at", "deadline"]
+INPUT_COLUMNS = [
+    "id",
+    *TEXT_COLUMNS,
+    "goal",
+    *CATEGORY_COLUMNS,
+    *DATE_COLUMNS,
+    "state",
+]
+MISSING_CATEGORY = "unknown"
+
+SECONDS_PER_DAY = 24 * 60 * 60
+MODEL_FEATURE_COLUMNS = [
+    # *TEXT_COLUMNS,
+    "goal",
+    *CATEGORY_COLUMNS,
+    "duration_days",
+]
