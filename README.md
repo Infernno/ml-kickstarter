@@ -13,15 +13,16 @@ uv run pre-commit install
 
 ## Prepare data
 
-Download the source dataset and run preprocessing:
+Download the source dataset, prepare features and split the data:
 
 ```powershell
 uv run ml-kickstarter download
 uv run dvc repro
 ```
 
-Source: `data/raw/dataset.csv`. Result: `data/processed/prepared.csv`.
-DVC reruns preprocessing when its inputs or code change.
+Source: `data/raw/dataset.csv`. Prepared data: `data/processed/prepared.csv`.
+Splits: `data/splits/train.csv`, `validation.csv` and `test.csv`.
+DVC reruns stages when their inputs or code change.
 
 Preprocessing uses Polars to:
 
@@ -36,12 +37,22 @@ Rules are in [preprocess.py](src/ml_kickstarter/data/preprocess.py),
 with column lists in [constants.py](src/ml_kickstarter/constants.py).
 Data paths are configured in [configs/data/kickstarter.yaml](configs/data/kickstarter.yaml).
 
+## Split data
+
+The random split keeps class proportions: 70% train, 15% validation and 15% test.
+Proportions and seed are in [configs/split/random.yaml](configs/split/random.yaml).
+After preparing the CSV, run this stage alone with:
+
+```powershell
+uv run ml-kickstarter split
+```
+
 ## Data versions
 
 DVC stores versions in Cloudflare R2: `data` is the dataset remote, `models` is for models.
 Downloading published versions requires no account or access keys.
 
-To download both raw and prepared data without running preprocessing:
+To download published raw data, prepared data and splits:
 
 ```powershell
 uv run dvc pull -r data

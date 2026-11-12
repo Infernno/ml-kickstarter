@@ -15,3 +15,22 @@ stages:
     outs:
       - data/processed/prepared.csv:
           remote: data
+  split:
+    cmd: uv run ml-kickstarter split
+    deps:
+      - pyproject.toml
+      - uv.lock
+      - data/processed/prepared.csv
+      - configs/config.yaml
+      - configs/data/kickstarter.yaml
+      - configs/split/random.yaml
+      - src/ml_kickstarter/commands.py
+      - src/ml_kickstarter/constants.py
+      - src/ml_kickstarter/data/split.py
+    outs:
+      - data/splits/train.csv:
+          remote: data
+      - data/splits/validation.csv:
+          remote: data
+      - data/splits/test.csv:
+          remote: data

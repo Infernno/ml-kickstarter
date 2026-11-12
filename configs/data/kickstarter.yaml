@@ -1,3 +1,4 @@
 raw_path: data/raw/dataset.csv
 prepared_path: data/processed/prepared.csv
+split_dir: data/splits
 remote: data

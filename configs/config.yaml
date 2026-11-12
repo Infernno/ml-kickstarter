@@ -1,3 +1,4 @@
 defaults:
   - data: kickstarter
+  - split: random
   - _self_
