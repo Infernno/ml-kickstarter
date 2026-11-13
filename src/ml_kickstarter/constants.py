@@ -11,11 +11,17 @@ INPUT_COLUMNS = [
     *DATE_COLUMNS,
     "state",
 ]
+INFERENCE_INPUT_COLUMNS = [
+    "id",
+    "goal",
+    *CATEGORY_COLUMNS,
+    "launched_at",
+    "deadline",
+]
 MISSING_CATEGORY = "unknown"
 
 SECONDS_PER_DAY = 24 * 60 * 60
 MODEL_FEATURE_COLUMNS = [
-    # *TEXT_COLUMNS,
     "goal",
     *CATEGORY_COLUMNS,
     "duration_days",

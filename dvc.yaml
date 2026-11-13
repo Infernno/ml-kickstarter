@@ -9,6 +9,7 @@ stages:
       - configs/data/kickstarter.yaml
       - src/ml_kickstarter/commands.py
       - src/ml_kickstarter/constants.py
+      - src/ml_kickstarter/data/cleaning.py
       - src/ml_kickstarter/data/download.py
       - src/ml_kickstarter/data/features.py
       - src/ml_kickstarter/data/preprocess.py
@@ -47,6 +48,7 @@ stages:
       - configs/encoding/baseline.yaml
       - configs/train/baseline.yaml
       - configs/logging/mlflow.yaml
+      - configs/infer/default.yaml
       - src/ml_kickstarter/commands.py
       - src/ml_kickstarter/constants.py
       - src/ml_kickstarter/data/encoding.py
@@ -74,6 +76,7 @@ stages:
       - configs/split/random.yaml
       - configs/train/catboost.yaml
       - configs/logging/mlflow.yaml
+      - configs/infer/default.yaml
       - src/ml_kickstarter/commands.py
       - src/ml_kickstarter/constants.py
       - src/ml_kickstarter/data/download.py

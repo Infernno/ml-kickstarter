@@ -3,3 +3,4 @@ outs:
   size: 454851804
   hash: md5
   path: data/raw/dataset.csv
+  remote: data

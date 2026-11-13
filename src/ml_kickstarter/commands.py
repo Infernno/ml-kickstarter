@@ -8,6 +8,7 @@ from omegaconf import DictConfig
 from ml_kickstarter.data.download import ensure_data
 from ml_kickstarter.data.preprocess import prepare_csv
 from ml_kickstarter.data.split import split_csv
+from ml_kickstarter.inference.predict import predict_csv
 from ml_kickstarter.training import baseline, catboost
 
 
@@ -71,6 +72,12 @@ def train_catboost(*overrides: str) -> dict:
     return catboost.train_catboost(train_path, validation_path, config)
 
 
+def infer(*overrides: str) -> str:
+    """Predict success probabilities with a saved baseline or CatBoost model."""
+    config = _load_config(overrides)
+    return str(predict_csv(config.infer))
+
+
 def main() -> None:
     fire.Fire(
         {
@@ -79,6 +86,7 @@ def main() -> None:
             "split": split,
             "train_baseline": train_baseline,
             "train_catboost": train_catboost,
+            "infer": infer,
         }
     )
 

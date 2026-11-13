@@ -2,43 +2,22 @@ from pathlib import Path
 
 import polars as pl
 
-from ml_kickstarter.constants import (
-    CATEGORY_COLUMNS,
-    DATE_COLUMNS,
-    INPUT_COLUMNS,
-    MISSING_CATEGORY,
-    TARGET_BY_STATE,
-    TEXT_COLUMNS,
+from ml_kickstarter.constants import INPUT_COLUMNS, TARGET_BY_STATE
+from ml_kickstarter.data.cleaning import (
+    clean_columns,
+    fill_missing_values,
+    valid_campaigns,
 )
 from ml_kickstarter.data.features import build_features
-
-
-def clean_columns(data: pl.DataFrame) -> pl.DataFrame:
-    """Trim whitespace, normalize blanks and parse numbers and Unix timestamps."""
-    return data.with_columns(pl.all().str.strip_chars().replace("", None)).with_columns(
-        pl.col(["id", *DATE_COLUMNS]).cast(pl.Int64, strict=False),
-        pl.col("goal").cast(pl.Float64, strict=False),
-    )
 
 
 def filter_campaigns(data: pl.DataFrame) -> pl.DataFrame:
     """Keep labeled campaigns with usable goals, IDs, currencies and dates."""
     return data.filter(
+        valid_campaigns(),
         pl.col("state").is_in(list(TARGET_BY_STATE)),
-        pl.col("id") > 0,
-        pl.col("goal").is_finite() & (pl.col("goal") > 0),
-        pl.col("currency").is_not_null(),
         pl.col("created_at") > 0,
         pl.col("created_at") <= pl.col("launched_at"),
-        pl.col("launched_at") < pl.col("deadline"),
-    )
-
-
-def fill_missing_values(data: pl.DataFrame) -> pl.DataFrame:
-    """Keep campaigns with missing text or categories without fitting statistics."""
-    return data.with_columns(
-        pl.col(TEXT_COLUMNS).fill_null(""),
-        pl.col(CATEGORY_COLUMNS).fill_null(MISSING_CATEGORY),
     )
 
 

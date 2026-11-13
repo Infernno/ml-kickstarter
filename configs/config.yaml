@@ -4,4 +4,5 @@ defaults:
   - encoding: baseline
   - train: baseline
   - logging: mlflow
+  - infer: default
   - _self_

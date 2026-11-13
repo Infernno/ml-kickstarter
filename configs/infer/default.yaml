@@ -1,0 +1,9 @@
+model: catboost
+input_path: data/splits/validation.csv
+output_path: data/predictions/${infer.model}.csv
+model_dir: models/${infer.model}
+data_remote: ${data.remote}
+model_remote: models
+threshold: 0.5
+batch_size: 4096
+num_threads: 2
