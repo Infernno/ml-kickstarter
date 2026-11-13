@@ -3,4 +3,5 @@ defaults:
   - split: random
   - encoding: baseline
   - train: baseline
+  - logging: mlflow
   - _self_

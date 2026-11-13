@@ -4,6 +4,7 @@ from tempfile import TemporaryDirectory
 import lightning as L
 import torch
 from lightning.pytorch.callbacks import ModelCheckpoint
+from lightning.pytorch.loggers import MLFlowLogger
 from omegaconf import DictConfig
 from torch.utils.data import DataLoader, TensorDataset
 
@@ -11,6 +12,8 @@ from ml_kickstarter.data.encoding import prepare_datasets
 from ml_kickstarter.models.logistic_regression import LogisticRegression
 from ml_kickstarter.training.artifacts import save_artifacts
 from ml_kickstarter.training.metrics import TrainingHistory
+from ml_kickstarter.training.plots import save_training_plots
+from ml_kickstarter.training.tracking import log_results, track_training
 
 
 def create_loader(
@@ -30,6 +33,8 @@ def fit_model(
     validation: TensorDataset,
     config: DictConfig,
     checkpoint_dir: str,
+    logger: MLFlowLogger,
+    log_every_n_steps: int,
 ) -> tuple[Path, list[dict]]:
     """Run Lightning and return the best checkpoint and epoch metrics."""
     input_dim = train.tensors[0].shape[1]
@@ -48,7 +53,8 @@ def fit_model(
         devices=1,
         max_epochs=config.epochs,
         deterministic=True,
-        logger=False,
+        logger=logger,
+        log_every_n_steps=log_every_n_steps,
         enable_progress_bar=False,
         enable_model_summary=False,
         num_sanity_val_steps=0,
@@ -77,8 +83,19 @@ def train_baseline(
         validation_path,
         handle_unknown=config.encoding.handle_unknown,
     )
-    with TemporaryDirectory(prefix="kickstarter-checkpoints-") as checkpoint_dir:
-        checkpoint_path, history = fit_model(
-            train, validation, config.train, checkpoint_dir
-        )
-        return save_artifacts(checkpoint_path, preprocessor, history, config)
+    with track_training(config) as logger:
+        with TemporaryDirectory(prefix="kickstarter-checkpoints-") as checkpoint_dir:
+            checkpoint_path, history = fit_model(
+                train,
+                validation,
+                config.train,
+                checkpoint_dir,
+                logger,
+                config.logging.log_every_n_steps,
+            )
+            metrics = save_artifacts(
+                checkpoint_path, preprocessor, history, config, logger.run_id
+            )
+        plots = save_training_plots(history, config.logging.plots_dir)
+        log_results(logger, config.train.output_dir, plots, metrics)
+    return metrics

@@ -5,8 +5,8 @@ stages:
     deps:
     - path: configs/config.yaml
       hash: md5
-      md5: cee5b1fdca08a844885929d6b8f46eda
-      size: 104
+      md5: 12cc57749fdec82b0d5217f20059bcde
+      size: 124
     - path: configs/data/kickstarter.yaml
       hash: md5
       md5: 5c16bebc8e03a66cab58eda227ea8b86
@@ -17,8 +17,8 @@ stages:
       size: 454851804
     - path: pyproject.toml
       hash: md5
-      md5: 6a1fb95a471952c3390d856067d1d6d5
-      size: 894
+      md5: 70f5f79f595723ec7dd459654eaf25d8
+      size: 942
     - path: src/ml_kickstarter/commands.py
       hash: md5
       md5: 2ad6368e42168ba020568cbb0a54a33e
@@ -41,8 +41,8 @@ stages:
       size: 2763
     - path: uv.lock
       hash: md5
-      md5: f54e4bcf000b72af57dc21f76d39a359
-      size: 419459
+      md5: 2d8705a64a051db89aebe147c0db9976
+      size: 560814
     outs:
     - path: data/processed/prepared.csv
       hash: md5
@@ -53,8 +53,8 @@ stages:
     deps:
     - path: configs/config.yaml
       hash: md5
-      md5: cee5b1fdca08a844885929d6b8f46eda
-      size: 104
+      md5: 12cc57749fdec82b0d5217f20059bcde
+      size: 124
     - path: configs/data/kickstarter.yaml
       hash: md5
       md5: 5c16bebc8e03a66cab58eda227ea8b86
@@ -69,8 +69,8 @@ stages:
       size: 142993460
     - path: pyproject.toml
       hash: md5
-      md5: 6a1fb95a471952c3390d856067d1d6d5
-      size: 894
+      md5: 70f5f79f595723ec7dd459654eaf25d8
+      size: 942
     - path: src/ml_kickstarter/commands.py
       hash: md5
       md5: 2ad6368e42168ba020568cbb0a54a33e
@@ -85,8 +85,8 @@ stages:
       size: 2405
     - path: uv.lock
       hash: md5
-      md5: f54e4bcf000b72af57dc21f76d39a359
-      size: 419459
+      md5: 2d8705a64a051db89aebe147c0db9976
+      size: 560814
     outs:
     - path: data/splits/test.csv
       hash: md5
@@ -105,8 +105,8 @@ stages:
     deps:
     - path: configs/config.yaml
       hash: md5
-      md5: cee5b1fdca08a844885929d6b8f46eda
-      size: 104
+      md5: 12cc57749fdec82b0d5217f20059bcde
+      size: 124
     - path: configs/data/kickstarter.yaml
       hash: md5
       md5: 5c16bebc8e03a66cab58eda227ea8b86
@@ -115,6 +115,10 @@ stages:
       hash: md5
       md5: 02327654ee23cb2507f17b48a5a5e6a9
       size: 23
+    - path: configs/logging/mlflow.yaml
+      hash: md5
+      md5: 261056ad7d0ef4d03faa1149de86966b
+      size: 146
     - path: configs/split/random.yaml
       hash: md5
       md5: 28ce7efaea8c61b99c3a0e1dcf9846cc
@@ -133,8 +137,8 @@ stages:
       size: 21446646
     - path: pyproject.toml
       hash: md5
-      md5: 6a1fb95a471952c3390d856067d1d6d5
-      size: 894
+      md5: 70f5f79f595723ec7dd459654eaf25d8
+      size: 942
     - path: src/ml_kickstarter/commands.py
       hash: md5
       md5: 2ad6368e42168ba020568cbb0a54a33e
@@ -153,27 +157,40 @@ stages:
       size: 591
     - path: src/ml_kickstarter/models/logistic_regression.py
       hash: md5
-      md5: cafa53130e357fdd65f5df1e9fdfae25
-      size: 2008
+      md5: 84091b0bb98fe4c372a28e508fde1d5e
+      size: 2252
     - path: src/ml_kickstarter/training/artifacts.py
       hash: md5
-      md5: 494dddfd03b554fd256b3dfcad69f7a4
-      size: 1702
+      md5: a0fdf1efabaaeba41c838d35e75e7469
+      size: 1917
     - path: src/ml_kickstarter/training/baseline.py
       hash: md5
-      md5: a48e2b60046b4b0eebb2da9782599bc4
-      size: 2987
+      md5: fd2a61c816eba2b47f5e4fb719c4a440
+      size: 3683
     - path: src/ml_kickstarter/training/metrics.py
       hash: md5
-      md5: 1daa60ef4b30889bb618ce12de748350
-      size: 2642
+      md5: 974e3eda36e7b6657d11f8fa76b6344c
+      size: 3004
+    - path: src/ml_kickstarter/training/plots.py
+      hash: md5
+      md5: bb4e204d903c43a3e93c9578f592cec4
+      size: 1101
+    - path: src/ml_kickstarter/training/tracking.py
+      hash: md5
+      md5: 8b98bd686dba08ca8896c501e03d87d9
+      size: 2022
     - path: uv.lock
       hash: md5
-      md5: f54e4bcf000b72af57dc21f76d39a359
-      size: 419459
+      md5: 2d8705a64a051db89aebe147c0db9976
+      size: 560814
     outs:
     - path: models/baseline
       hash: md5
-      md5: f144870b2a85f8a2dcae26082e25b3ff.dir
-      size: 27201
+      md5: a15c263547fc0d1e71bab0e95d75e6b8.dir
+      size: 27428
       nfiles: 6
+    - path: plots/baseline
+      hash: md5
+      md5: ca8632fc0204e1876fd12663128594da.dir
+      size: 158436
+      nfiles: 3

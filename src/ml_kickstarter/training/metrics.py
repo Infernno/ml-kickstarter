@@ -64,6 +64,17 @@ class TrainingHistory(L.Callback):
         self.history.append(
             {"epoch": epoch, "train": train_metrics, "validation": validation_metrics}
         )
+        trainer.logger.log_metrics(
+            {
+                f"{split}/{name}": value
+                for split, metrics in (
+                    ("train", train_metrics),
+                    ("validation", validation_metrics),
+                )
+                for name, value in metrics.items()
+            },
+            step=epoch,
+        )
         logging.getLogger(__name__).info(
             "Epoch %d/%d: train Logloss=%.4f, validation Logloss=%.4f, ROC-AUC=%.4f",
             epoch,

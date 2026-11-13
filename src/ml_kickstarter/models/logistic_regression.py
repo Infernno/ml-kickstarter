@@ -26,6 +26,14 @@ class LogisticRegression(L.LightningModule):
         loss = self.criterion(self(features), targets)
         if not torch.isfinite(loss):
             raise ValueError("Training loss became non-finite")
+        self.log_dict(
+            {
+                "batch/log_loss": loss,
+                "batch/learning_rate": self.optimizers().param_groups[0]["lr"],
+            },
+            on_step=True,
+            on_epoch=False,
+        )
         return loss
 
     def validation_step(self, batch, batch_idx: int) -> None:

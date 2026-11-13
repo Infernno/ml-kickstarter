@@ -10,23 +10,32 @@ from omegaconf import DictConfig, OmegaConf
 from sklearn.compose import ColumnTransformer
 
 
-def save_artifacts(
-    checkpoint_path: Path,
-    preprocessor: ColumnTransformer,
-    history: list[dict],
-    config: DictConfig,
-) -> dict:
-    """Save the selected checkpoint and everything needed to reproduce predictions."""
-    checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=True)
-    best_epoch = checkpoint["epoch"] + 1
-    metrics = next(record for record in history if record["epoch"] == best_epoch)
-    metadata = {
+def git_metadata() -> dict:
+    """Identify the source revision and whether the working tree has changes."""
+    return {
         "git_commit": subprocess.check_output(
             ["git", "rev-parse", "HEAD"], text=True
         ).strip(),
         "git_dirty": bool(
             subprocess.check_output(["git", "status", "--porcelain"], text=True).strip()
         ),
+    }
+
+
+def save_artifacts(
+    checkpoint_path: Path,
+    preprocessor: ColumnTransformer,
+    history: list[dict],
+    config: DictConfig,
+    run_id: str,
+) -> dict:
+    """Save the selected checkpoint and everything needed to reproduce predictions."""
+    checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=True)
+    best_epoch = checkpoint["epoch"] + 1
+    metrics = next(record for record in history if record["epoch"] == best_epoch)
+    metadata = {
+        **git_metadata(),
+        "mlflow_run_id": run_id,
         "feature_names": preprocessor.get_feature_names_out().tolist(),
         "torch_version": str(torch.__version__),
         "lightning_version": L.__version__,

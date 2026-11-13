@@ -46,6 +46,7 @@ stages:
       - configs/split/random.yaml
       - configs/encoding/baseline.yaml
       - configs/train/baseline.yaml
+      - configs/logging/mlflow.yaml
       - src/ml_kickstarter/commands.py
       - src/ml_kickstarter/constants.py
       - src/ml_kickstarter/data/encoding.py
@@ -54,6 +55,10 @@ stages:
       - src/ml_kickstarter/training/baseline.py
       - src/ml_kickstarter/training/artifacts.py
       - src/ml_kickstarter/training/metrics.py
+      - src/ml_kickstarter/training/tracking.py
+      - src/ml_kickstarter/training/plots.py
     outs:
       - models/baseline:
           remote: models
+      - plots/baseline:
+          cache: false

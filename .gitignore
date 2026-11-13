@@ -224,3 +224,11 @@ __marimo__/
 
 # Trained model artifacts (tracked by DVC)
 /models/
+
+# Generated training plots (saved to MLflow)
+/plots/
+
+# Local MLflow server state
+/mlflow.db*
+/mlruns/
+/mlartifacts/
