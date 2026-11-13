@@ -17,7 +17,7 @@ Download the source dataset, prepare features and split the data:
 
 ```powershell
 uv run ml-kickstarter download
-uv run dvc repro
+uv run dvc repro split
 ```
 
 Source: `data/raw/dataset.csv`. Prepared data: `data/processed/prepared.csv`.
@@ -47,6 +47,22 @@ After preparing the CSV, run this stage alone with:
 uv run ml-kickstarter split
 ```
 
+## Train
+
+Train the logistic-regression baseline with PyTorch Lightning on CPU:
+
+```powershell
+uv run ml-kickstarter train_baseline
+```
+
+Missing data is downloaded and prepared automatically.
+Training settings are in [configs/train/baseline.yaml](configs/train/baseline.yaml).
+
+The model with the lowest validation loss is saved to `models/baseline/model.ckpt`.
+The same folder contains the fitted preprocessor, metrics and training details.
+
+To run the full DVC pipeline, use `uv run dvc repro`.
+
 ## Data versions
 
 DVC stores versions in Cloudflare R2: `data` is the dataset remote, `models` is for models.
@@ -70,7 +86,14 @@ uv run dvc push -r data
 Uploading requires R2 credentials and S3 remote settings in `.dvc/config.local`.
 This local file is ignored by Git. Preprocessing does not upload data automatically.
 
+## Checks
+
+```powershell
+uv run pre-commit run --all-files
+```
+
 ## TODO
 
+- [ ] Add MLflow tracking and training plots
 - [ ] Use text features
 - [ ] Try a time-based train/validation/test split, including class balance and label availability

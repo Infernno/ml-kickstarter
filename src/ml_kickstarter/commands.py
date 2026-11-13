@@ -1,14 +1,19 @@
+import logging
+from pathlib import Path
+
 import fire
-from hydra import compose, initialize
+from hydra import compose, initialize_config_dir
 from omegaconf import DictConfig
 
 from ml_kickstarter.data.download import ensure_data
 from ml_kickstarter.data.preprocess import prepare_csv
 from ml_kickstarter.data.split import split_csv
+from ml_kickstarter.training import baseline
 
 
 def _load_config(overrides: tuple[str, ...]) -> DictConfig:
-    with initialize(version_base=None, config_path="../../configs"):
+    config_dir = str(Path("configs").resolve())
+    with initialize_config_dir(version_base=None, config_dir=config_dir):
         return compose(config_name="config", overrides=list(overrides))
 
 
@@ -38,8 +43,29 @@ def split(*overrides: str) -> None:
     )
 
 
+def train_baseline(*overrides: str) -> dict:
+    """Ensure data is available, then train and validate the tabular baseline."""
+    config = _load_config(overrides)
+    split_dir = Path(config.data.split_dir)
+    train_path = split_dir / "train.csv"
+    validation_path = split_dir / "validation.csv"
+    if not train_path.is_file() or not validation_path.is_file():
+        if not Path(config.data.prepared_path).is_file():
+            preprocess(*overrides)
+        split(*overrides)
+    logging.basicConfig(level=logging.INFO, format="%(message)s")
+    return baseline.train_baseline(train_path, validation_path, config)
+
+
 def main() -> None:
-    fire.Fire({"download": download, "preprocess": preprocess, "split": split})
+    fire.Fire(
+        {
+            "download": download,
+            "preprocess": preprocess,
+            "split": split,
+            "train_baseline": train_baseline,
+        }
+    )
 
 
 if __name__ == "__main__":

@@ -1,4 +1,6 @@
 defaults:
   - data: kickstarter
   - split: random
+  - encoding: baseline
+  - train: baseline
   - _self_

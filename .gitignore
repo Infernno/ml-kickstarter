@@ -221,3 +221,6 @@ __marimo__/
 
 # Local datasets (tracked by DVC)
 /data/
+
+# Trained model artifacts (tracked by DVC)
+/models/
