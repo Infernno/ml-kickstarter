@@ -4,7 +4,7 @@ import subprocess
 from pathlib import Path
 
 import joblib
-import lightning as L
+import lightning
 import torch
 from omegaconf import DictConfig, OmegaConf
 from sklearn.compose import ColumnTransformer
@@ -38,7 +38,7 @@ def save_artifacts(
         "mlflow_run_id": run_id,
         "feature_names": preprocessor.get_feature_names_out().tolist(),
         "torch_version": str(torch.__version__),
-        "lightning_version": L.__version__,
+        "lightning_version": lightning.__version__,
     }
     directory = Path(config.train.output_dir)
     directory.mkdir(parents=True, exist_ok=True)

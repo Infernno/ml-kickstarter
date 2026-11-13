@@ -1,7 +1,7 @@
 import logging
 from math import log
 
-import lightning as L
+import lightning
 import torch
 from sklearn.metrics import accuracy_score, f1_score, roc_auc_score
 from torch.nn.functional import binary_cross_entropy_with_logits
@@ -39,7 +39,7 @@ def evaluate(
     }
 
 
-class TrainingHistory(L.Callback):
+class TrainingHistory(lightning.Callback):
     """Record train and validation metrics using the weights at each epoch's end."""
 
     def __init__(
@@ -54,7 +54,7 @@ class TrainingHistory(L.Callback):
         self.history: list[dict] = []
 
     def on_validation_end(
-        self, trainer: L.Trainer, pl_module: LogisticRegression
+        self, trainer: lightning.Trainer, pl_module: LogisticRegression
     ) -> None:
         train_metrics = evaluate(pl_module, *self.train_data.tensors, self.threshold)
         validation_metrics = evaluate(

@@ -25,14 +25,13 @@ def track_training(config: DictConfig) -> Iterator[MLFlowLogger]:
         },
         synchronous=True,
     )
+    status = "failed"
     try:
         logger.log_hyperparams(OmegaConf.to_container(config, resolve=True))
         yield logger
-    except BaseException:
-        logger.finalize("failed")
-        raise
-    else:
-        logger.finalize("success")
+        status = "success"
+    finally:
+        logger.finalize(status)
 
 
 def log_results(

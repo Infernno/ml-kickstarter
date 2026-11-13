@@ -1,13 +1,13 @@
 from pathlib import Path
 
 import joblib
-import lightning as L
+import lightning
 import torch
 from sklearn.compose import ColumnTransformer
 from torch import nn
 
 
-class LogisticRegression(L.LightningModule):
+class LogisticRegression(lightning.LightningModule):
     """A linear classifier with Lightning training and validation steps."""
 
     def __init__(

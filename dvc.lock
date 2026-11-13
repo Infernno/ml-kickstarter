@@ -25,8 +25,8 @@ stages:
       size: 3255
     - path: src/ml_kickstarter/constants.py
       hash: md5
-      md5: ecc6f5cb9803c90f6aa75ce8b2260585
-      size: 595
+      md5: 003f0ba8199b9d08ca3cc8ff8c03656a
+      size: 653
     - path: src/ml_kickstarter/data/cleaning.py
       hash: md5
       md5: 43ad71289840ce08c80e8f3e01aa5812
@@ -81,8 +81,8 @@ stages:
       size: 3255
     - path: src/ml_kickstarter/constants.py
       hash: md5
-      md5: ecc6f5cb9803c90f6aa75ce8b2260585
-      size: 595
+      md5: 003f0ba8199b9d08ca3cc8ff8c03656a
+      size: 653
     - path: src/ml_kickstarter/data/split.py
       hash: md5
       md5: 99dfa970148ba1b737b109cce6ffc2fd
@@ -153,8 +153,8 @@ stages:
       size: 3255
     - path: src/ml_kickstarter/constants.py
       hash: md5
-      md5: ecc6f5cb9803c90f6aa75ce8b2260585
-      size: 595
+      md5: 003f0ba8199b9d08ca3cc8ff8c03656a
+      size: 653
     - path: src/ml_kickstarter/data/encoding.py
       hash: md5
       md5: fa7761695766487d5ebad18f44bd8078
@@ -165,28 +165,28 @@ stages:
       size: 574
     - path: src/ml_kickstarter/models/logistic_regression.py
       hash: md5
-      md5: 2824538251ec8ff53f664aa6fd73067c
-      size: 2183
+      md5: d44f81d9eeeee5cb53f32f4080761c32
+      size: 2186
     - path: src/ml_kickstarter/training/artifacts.py
       hash: md5
-      md5: 9e3d2832712256cc1889093c993e7ae6
-      size: 2161
+      md5: 47087cf865b398432b2b26020dad99c4
+      size: 2164
     - path: src/ml_kickstarter/training/baseline.py
       hash: md5
-      md5: 2c1cb14406cc0791da6be646e94d8a7e
-      size: 3582
+      md5: 3984f22fd2bab5d324f6d0cbb547b4f7
+      size: 3593
     - path: src/ml_kickstarter/training/metrics.py
       hash: md5
-      md5: a287abd95cd6bb41fb08a5937f548e83
-      size: 2919
+      md5: bc34a5a9a247b44b8059843b93539514
+      size: 2930
     - path: src/ml_kickstarter/training/plots.py
       hash: md5
-      md5: f6756954a1cd2b721de90b29d607eb06
-      size: 1168
+      md5: cf00fe9d7403f9692b5c2fdf025f7cf5
+      size: 1262
     - path: src/ml_kickstarter/training/tracking.py
       hash: md5
-      md5: ad210a907c93c029ca0e51aeb3959939
-      size: 2079
+      md5: b54ba8ab444f59744ef595394d74df47
+      size: 2054
     - path: uv.lock
       hash: md5
       md5: e0adbf8521999fa40dd0fb96802891ca
@@ -247,8 +247,8 @@ stages:
       size: 3255
     - path: src/ml_kickstarter/constants.py
       hash: md5
-      md5: ecc6f5cb9803c90f6aa75ce8b2260585
-      size: 595
+      md5: 003f0ba8199b9d08ca3cc8ff8c03656a
+      size: 653
     - path: src/ml_kickstarter/data/catboost.py
       hash: md5
       md5: 5bdf6d601e445059dbf9499eddb71e97
@@ -275,20 +275,20 @@ stages:
       size: 322
     - path: src/ml_kickstarter/training/artifacts.py
       hash: md5
-      md5: 9e3d2832712256cc1889093c993e7ae6
-      size: 2161
+      md5: 47087cf865b398432b2b26020dad99c4
+      size: 2164
     - path: src/ml_kickstarter/training/catboost.py
       hash: md5
       md5: 2f6a025bbb7fb777ca4e8fccbc503325
       size: 4101
     - path: src/ml_kickstarter/training/plots.py
       hash: md5
-      md5: f6756954a1cd2b721de90b29d607eb06
-      size: 1168
+      md5: cf00fe9d7403f9692b5c2fdf025f7cf5
+      size: 1262
     - path: src/ml_kickstarter/training/tracking.py
       hash: md5
-      md5: ad210a907c93c029ca0e51aeb3959939
-      size: 2079
+      md5: b54ba8ab444f59744ef595394d74df47
+      size: 2054
     - path: uv.lock
       hash: md5
       md5: e0adbf8521999fa40dd0fb96802891ca

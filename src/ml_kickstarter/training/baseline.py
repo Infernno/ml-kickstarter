@@ -1,7 +1,7 @@
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-import lightning as L
+import lightning
 import torch
 from lightning.pytorch.callbacks import ModelCheckpoint
 from lightning.pytorch.loggers import MLFlowLogger
@@ -48,7 +48,7 @@ def fit_model(
         save_top_k=1,
         save_weights_only=True,
     )
-    trainer = L.Trainer(
+    trainer = lightning.Trainer(
         accelerator="cpu",
         devices=1,
         max_epochs=config.epochs,
@@ -76,7 +76,7 @@ def train_baseline(
         raise ValueError(
             "epochs must be positive and threshold must be between 0 and 1"
         )
-    L.seed_everything(config.train.seed, workers=True)
+    lightning.seed_everything(config.train.seed, workers=True)
     torch.set_num_threads(config.train.num_threads)
     train, validation, preprocessor = prepare_datasets(
         train_path,
