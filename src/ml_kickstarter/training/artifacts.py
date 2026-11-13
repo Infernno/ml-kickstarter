@@ -44,6 +44,18 @@ def save_artifacts(
     directory.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(checkpoint_path, directory / "model.ckpt")
     joblib.dump(preprocessor, directory / "preprocessor.joblib")
+    save_training_report(directory, config, history, metrics, metadata)
+    return metrics
+
+
+def save_training_report(
+    directory: Path,
+    config: DictConfig,
+    history: list[dict],
+    metrics: dict,
+    metadata: dict,
+) -> None:
+    """Save the configuration, learning curves and selected model's metrics."""
     OmegaConf.save(config=config, f=directory / "config.yaml", resolve=True)
     for name, content in {
         "history": history,
@@ -53,4 +65,3 @@ def save_artifacts(
         (directory / f"{name}.json").write_text(
             json.dumps(content, indent=2) + "\n", encoding="utf-8"
         )
-    return metrics

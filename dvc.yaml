@@ -62,3 +62,32 @@ stages:
           remote: models
       - plots/baseline:
           cache: false
+  train_catboost:
+    cmd: uv run ml-kickstarter train_catboost
+    deps:
+      - pyproject.toml
+      - uv.lock
+      - data/splits/train.csv
+      - data/splits/validation.csv
+      - configs/config.yaml
+      - configs/data/kickstarter.yaml
+      - configs/split/random.yaml
+      - configs/train/catboost.yaml
+      - configs/logging/mlflow.yaml
+      - src/ml_kickstarter/commands.py
+      - src/ml_kickstarter/constants.py
+      - src/ml_kickstarter/data/download.py
+      - src/ml_kickstarter/data/split.py
+      - src/ml_kickstarter/data/catboost.py
+      - src/ml_kickstarter/data/encoding.py
+      - src/ml_kickstarter/data/features.py
+      - src/ml_kickstarter/models/catboost.py
+      - src/ml_kickstarter/training/catboost.py
+      - src/ml_kickstarter/training/artifacts.py
+      - src/ml_kickstarter/training/tracking.py
+      - src/ml_kickstarter/training/plots.py
+    outs:
+      - models/catboost:
+          remote: models
+      - plots/catboost:
+          cache: false

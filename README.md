@@ -55,22 +55,30 @@ Start MLflow in a separate terminal:
 uv run mlflow server --host 127.0.0.1 --port 8080 --workers 1 --backend-store-uri sqlite:///mlflow.db
 ```
 
-Then train the logistic-regression baseline with PyTorch Lightning on CPU:
+Train the logistic-regression baseline (PyTorch Lightning) or CatBoost on CPU:
 
 ```powershell
 uv run ml-kickstarter train_baseline
+uv run ml-kickstarter train_catboost
 ```
 
 Missing data is downloaded and prepared automatically.
-Settings: [training](configs/train/baseline.yaml) and [MLflow](configs/logging/mlflow.yaml).
+Both models use the same train/validation split and tabular features; text is excluded.
+CatBoost receives categorical columns directly, without one-hot encoding or scaling.
+Settings: [baseline](configs/train/baseline.yaml), [CatBoost](configs/train/catboost.yaml)
+and [MLflow](configs/logging/mlflow.yaml).
 
 Open [MLflow](http://127.0.0.1:8080) to compare runs, metrics and parameters.
 `batch/log_loss` and `batch/learning_rate` are logged every 10 training steps;
-`train/*` and `validation/*` are logged once per epoch, with epoch as their step.
-Logloss, ROC-AUC and F1 plots are also saved in `plots/baseline/`.
+`train/*` and `validation/*` are logged once per epoch for the baseline and every
+10 boosting iterations for CatBoost. Logloss, ROC-AUC and F1 plots are saved in
+`plots/baseline/` and `plots/catboost/`.
 
 The model with the lowest validation loss is saved to `models/baseline/model.ckpt`.
 The same folder contains the fitted preprocessor, metrics and training details.
+CatBoost saves its best model to `models/catboost/model.cbm`, with categorical
+processing included. It stops early if validation loss does not improve for
+100 iterations. Its metrics and training details are saved alongside the model.
 
 To run the full DVC pipeline, use `uv run dvc repro`.
 
@@ -105,5 +113,8 @@ uv run pre-commit run --all-files
 
 ## TODO
 
+- [ ] Add GitHub Actions
+- [ ] Add a Telegram bot
+- [ ] Add unit tests
 - [ ] Use text features
 - [ ] Try a time-based train/validation/test split, including class balance and label availability

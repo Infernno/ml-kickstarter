@@ -1,0 +1,16 @@
+name: catboost
+output_dir: models/catboost
+params:
+  iterations: 1000
+  depth: 6
+  learning_rate: 0.05
+  l2_leaf_reg: 3.0
+  random_seed: 42
+  thread_count: 2
+  loss_function: Logloss
+  eval_metric: Logloss
+  custom_metric: [AUC, F1, Accuracy]
+  early_stopping_rounds: 100
+  use_best_model: true
+  allow_writing_files: false
+  verbose: false

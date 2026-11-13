@@ -1,5 +1,5 @@
 web_url: http://127.0.0.1:8080
 experiment_name: kickstarter-success-prediction
-run_name: baseline
+run_name: ${train.name}
 log_every_n_steps: 10
-plots_dir: plots/baseline
+plots_dir: plots/${train.name}

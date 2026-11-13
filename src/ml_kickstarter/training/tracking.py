@@ -40,6 +40,8 @@ def log_results(
     model_dir: str | Path,
     plots: list[Path],
     metrics: dict,
+    *,
+    step_name: str = "epoch",
 ) -> None:
     """Log the best epoch and small artifacts; model files are managed by DVC."""
     best_metrics = {
@@ -48,7 +50,8 @@ def log_results(
         for name, value in metrics[split].items()
     }
     logger.log_metrics(
-        {"best_epoch": metrics["epoch"], **best_metrics}, step=metrics["epoch"]
+        {f"best_{step_name}": metrics[step_name], **best_metrics},
+        step=metrics[step_name],
     )
     directory = Path(model_dir)
     for name in ("config.yaml", "history.json", "metrics.json", "metadata.json"):

@@ -8,7 +8,7 @@ from omegaconf import DictConfig
 from ml_kickstarter.data.download import ensure_data
 from ml_kickstarter.data.preprocess import prepare_csv
 from ml_kickstarter.data.split import split_csv
-from ml_kickstarter.training import baseline
+from ml_kickstarter.training import baseline, catboost
 
 
 def _load_config(overrides: tuple[str, ...]) -> DictConfig:
@@ -43,8 +43,8 @@ def split(*overrides: str) -> None:
     )
 
 
-def train_baseline(*overrides: str) -> dict:
-    """Ensure data is available, then train and validate the tabular baseline."""
+def _prepare_training(overrides: tuple[str, ...]) -> tuple[DictConfig, Path, Path]:
+    """Share data recovery and the fixed split between training commands."""
     config = _load_config(overrides)
     split_dir = Path(config.data.split_dir)
     train_path = split_dir / "train.csv"
@@ -54,7 +54,21 @@ def train_baseline(*overrides: str) -> dict:
             preprocess(*overrides)
         split(*overrides)
     logging.basicConfig(level=logging.INFO, format="%(message)s")
+    return config, train_path, validation_path
+
+
+def train_baseline(*overrides: str) -> dict:
+    """Ensure data is available, then train and validate the tabular baseline."""
+    config, train_path, validation_path = _prepare_training(overrides)
     return baseline.train_baseline(train_path, validation_path, config)
+
+
+def train_catboost(*overrides: str) -> dict:
+    """Train CatBoost with native categories on the same prepared split."""
+    config, train_path, validation_path = _prepare_training(
+        ("train=catboost", *overrides)
+    )
+    return catboost.train_catboost(train_path, validation_path, config)
 
 
 def main() -> None:
@@ -64,6 +78,7 @@ def main() -> None:
             "preprocess": preprocess,
             "split": split,
             "train_baseline": train_baseline,
+            "train_catboost": train_catboost,
         }
     )
 

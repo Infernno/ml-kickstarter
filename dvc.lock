@@ -17,12 +17,12 @@ stages:
       size: 454851804
     - path: pyproject.toml
       hash: md5
-      md5: 70f5f79f595723ec7dd459654eaf25d8
-      size: 942
+      md5: cfa84e7fbe38cdef7cf81a1ceee6644c
+      size: 966
     - path: src/ml_kickstarter/commands.py
       hash: md5
-      md5: 2ad6368e42168ba020568cbb0a54a33e
-      size: 2407
+      md5: 1096ba44caf7a90a38745f2b014803c0
+      size: 3060
     - path: src/ml_kickstarter/constants.py
       hash: md5
       md5: 637020c8f56bd2a0a23e3151f3abe5c7
@@ -41,8 +41,8 @@ stages:
       size: 2763
     - path: uv.lock
       hash: md5
-      md5: 2d8705a64a051db89aebe147c0db9976
-      size: 560814
+      md5: e0adbf8521999fa40dd0fb96802891ca
+      size: 564211
     outs:
     - path: data/processed/prepared.csv
       hash: md5
@@ -69,12 +69,12 @@ stages:
       size: 142993460
     - path: pyproject.toml
       hash: md5
-      md5: 70f5f79f595723ec7dd459654eaf25d8
-      size: 942
+      md5: cfa84e7fbe38cdef7cf81a1ceee6644c
+      size: 966
     - path: src/ml_kickstarter/commands.py
       hash: md5
-      md5: 2ad6368e42168ba020568cbb0a54a33e
-      size: 2407
+      md5: 1096ba44caf7a90a38745f2b014803c0
+      size: 3060
     - path: src/ml_kickstarter/constants.py
       hash: md5
       md5: 637020c8f56bd2a0a23e3151f3abe5c7
@@ -85,8 +85,8 @@ stages:
       size: 2405
     - path: uv.lock
       hash: md5
-      md5: 2d8705a64a051db89aebe147c0db9976
-      size: 560814
+      md5: e0adbf8521999fa40dd0fb96802891ca
+      size: 564211
     outs:
     - path: data/splits/test.csv
       hash: md5
@@ -117,16 +117,16 @@ stages:
       size: 23
     - path: configs/logging/mlflow.yaml
       hash: md5
-      md5: 261056ad7d0ef4d03faa1149de86966b
-      size: 146
+      md5: 38b463d5251685799a6d96dc7d6ae011
+      size: 156
     - path: configs/split/random.yaml
       hash: md5
       md5: 28ce7efaea8c61b99c3a0e1dcf9846cc
       size: 64
     - path: configs/train/baseline.yaml
       hash: md5
-      md5: 1a3a1d0ab664aad66fba470e1af163e6
-      size: 136
+      md5: af879f61e96564b06d341898b36bf250
+      size: 151
     - path: data/splits/train.csv
       hash: md5
       md5: 4735185f3bc040efe6093cbc76cfcf9b
@@ -137,12 +137,12 @@ stages:
       size: 21446646
     - path: pyproject.toml
       hash: md5
-      md5: 70f5f79f595723ec7dd459654eaf25d8
-      size: 942
+      md5: cfa84e7fbe38cdef7cf81a1ceee6644c
+      size: 966
     - path: src/ml_kickstarter/commands.py
       hash: md5
-      md5: 2ad6368e42168ba020568cbb0a54a33e
-      size: 2407
+      md5: 1096ba44caf7a90a38745f2b014803c0
+      size: 3060
     - path: src/ml_kickstarter/constants.py
       hash: md5
       md5: 637020c8f56bd2a0a23e3151f3abe5c7
@@ -161,8 +161,8 @@ stages:
       size: 2252
     - path: src/ml_kickstarter/training/artifacts.py
       hash: md5
-      md5: a0fdf1efabaaeba41c838d35e75e7469
-      size: 1917
+      md5: 6dc15697f0c455bac68dbe9d4c756376
+      size: 2228
     - path: src/ml_kickstarter/training/baseline.py
       hash: md5
       md5: fd2a61c816eba2b47f5e4fb719c4a440
@@ -173,24 +173,122 @@ stages:
       size: 3004
     - path: src/ml_kickstarter/training/plots.py
       hash: md5
-      md5: bb4e204d903c43a3e93c9578f592cec4
-      size: 1101
+      md5: f6756954a1cd2b721de90b29d607eb06
+      size: 1168
     - path: src/ml_kickstarter/training/tracking.py
       hash: md5
-      md5: 8b98bd686dba08ca8896c501e03d87d9
-      size: 2022
+      md5: ad210a907c93c029ca0e51aeb3959939
+      size: 2079
     - path: uv.lock
       hash: md5
-      md5: 2d8705a64a051db89aebe147c0db9976
-      size: 560814
+      md5: e0adbf8521999fa40dd0fb96802891ca
+      size: 564211
     outs:
     - path: models/baseline
       hash: md5
-      md5: a15c263547fc0d1e71bab0e95d75e6b8.dir
-      size: 27428
+      md5: 684350f4ac2ef4c3996af1796728cd11.dir
+      size: 27446
       nfiles: 6
     - path: plots/baseline
       hash: md5
       md5: ca8632fc0204e1876fd12663128594da.dir
       size: 158436
+      nfiles: 3
+  train_catboost:
+    cmd: uv run ml-kickstarter train_catboost
+    deps:
+    - path: configs/config.yaml
+      hash: md5
+      md5: 12cc57749fdec82b0d5217f20059bcde
+      size: 124
+    - path: configs/data/kickstarter.yaml
+      hash: md5
+      md5: 5c16bebc8e03a66cab58eda227ea8b86
+      size: 110
+    - path: configs/logging/mlflow.yaml
+      hash: md5
+      md5: 38b463d5251685799a6d96dc7d6ae011
+      size: 156
+    - path: configs/split/random.yaml
+      hash: md5
+      md5: 28ce7efaea8c61b99c3a0e1dcf9846cc
+      size: 64
+    - path: configs/train/catboost.yaml
+      hash: md5
+      md5: 6bfd24a8671d15a7de4df7dcbe414843
+      size: 341
+    - path: data/splits/train.csv
+      hash: md5
+      md5: 4735185f3bc040efe6093cbc76cfcf9b
+      size: 100107734
+    - path: data/splits/validation.csv
+      hash: md5
+      md5: b55a69513200d3814831652b84a94052
+      size: 21446646
+    - path: pyproject.toml
+      hash: md5
+      md5: cfa84e7fbe38cdef7cf81a1ceee6644c
+      size: 966
+    - path: src/ml_kickstarter/commands.py
+      hash: md5
+      md5: 1096ba44caf7a90a38745f2b014803c0
+      size: 3060
+    - path: src/ml_kickstarter/constants.py
+      hash: md5
+      md5: 637020c8f56bd2a0a23e3151f3abe5c7
+      size: 528
+    - path: src/ml_kickstarter/data/catboost.py
+      hash: md5
+      md5: 5bdf6d601e445059dbf9499eddb71e97
+      size: 997
+    - path: src/ml_kickstarter/data/download.py
+      hash: md5
+      md5: 88fd1c08353893e85caeabdd94a8a503
+      size: 344
+    - path: src/ml_kickstarter/data/encoding.py
+      hash: md5
+      md5: eb4ebf97c6993eb41a69682f488ad6d7
+      size: 3279
+    - path: src/ml_kickstarter/data/features.py
+      hash: md5
+      md5: f3f5ae7d03b8c9057704d41c49c99ac2
+      size: 591
+    - path: src/ml_kickstarter/data/split.py
+      hash: md5
+      md5: 11358b719b38d766411291110e1255b7
+      size: 2405
+    - path: src/ml_kickstarter/models/catboost.py
+      hash: md5
+      md5: 94b85f2a70da318c28b3d697e2ea829a
+      size: 322
+    - path: src/ml_kickstarter/training/artifacts.py
+      hash: md5
+      md5: 6dc15697f0c455bac68dbe9d4c756376
+      size: 2228
+    - path: src/ml_kickstarter/training/catboost.py
+      hash: md5
+      md5: 2f6a025bbb7fb777ca4e8fccbc503325
+      size: 4101
+    - path: src/ml_kickstarter/training/plots.py
+      hash: md5
+      md5: f6756954a1cd2b721de90b29d607eb06
+      size: 1168
+    - path: src/ml_kickstarter/training/tracking.py
+      hash: md5
+      md5: ad210a907c93c029ca0e51aeb3959939
+      size: 2079
+    - path: uv.lock
+      hash: md5
+      md5: e0adbf8521999fa40dd0fb96802891ca
+      size: 564211
+    outs:
+    - path: models/catboost
+      hash: md5
+      md5: b24f519ce6d54d7e082192c816805a49.dir
+      size: 6901025
+      nfiles: 5
+    - path: plots/catboost
+      hash: md5
+      md5: d29a607566b606444f1b2385570f75a3.dir
+      size: 125377
       nfiles: 3
